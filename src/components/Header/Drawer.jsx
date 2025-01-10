@@ -1,12 +1,19 @@
 import React from "react";
 import { XIcon } from "@heroicons/react/solid";
+import { Link} from "react-router-dom";
+
 const Drawer = ({ isOpen, onclose }) => {
   return (
     <div className={`side-nav ${isOpen ? "open" : "closed"}`}>
-      <button onClick={onclose} className="close-btn"><XIcon className="close-icon icon"/></button>
+      <button onClick={onclose} className="close-btn">
+        <XIcon className="close-icon icon" />
+      </button>
       <nav>
         <ul className="mobile-nav-list">
-          <li>Home</li>
+          <li>
+            <Link to="/"> Home </Link>
+          </li>
+          <Link to='/products'> products  </Link>
           <li>About</li>
           <li>Contact</li>
         </ul>

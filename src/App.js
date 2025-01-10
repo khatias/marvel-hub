@@ -1,14 +1,8 @@
 import "./App.css";
-import Header from "./components/Header/Header";
-import Hero from "./components/HeroSection/Hero";
-
+import { RouterProvider } from "react-router-dom";
+import { router } from "./routes/route";
 function App() {
-  return (
-    <div className="App">
-      <Header />
-      <Hero />
-    </div>
-  );
+  return <RouterProvider router={router} />
 }
 
 export default App;
