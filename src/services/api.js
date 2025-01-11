@@ -69,3 +69,26 @@ export const fetchComicsByTitle = async (title) => {
     throw error;
   }
 };
+
+export const getCharacters = async (offset = 0) => {
+  const ts = Date.now();
+  const hash = generateHash(ts);
+  const BASE_URL = `https://gateway.marvel.com:443/v1/public/characters?offset=${offset}&ts=${ts}&apikey=${publicKey}&hash=${hash}`;
+
+  try {
+    const response = await fetch(BASE_URL);
+    if (!response.ok) throw new Error("Failed to fetch products.");
+    const data = await response.json();
+
+    const filteredData = data.data.results.filter(
+      (product) =>
+        product.thumbnail.path !==
+        "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available"
+    );
+
+    console.log(filteredData);
+    return { ...data, data: { ...data.data, results: filteredData } };
+  } catch (error) {
+    console.error("Error fetching products:", error);
+  }
+};

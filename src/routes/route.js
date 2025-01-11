@@ -3,6 +3,7 @@ import ProductDetails from "../pages/ProductDetails";
 import Home from "../pages/Home";
 import { createBrowserRouter } from "react-router-dom";
 import Layout from "../components/Layout/Layout";
+import Characters from "../pages/Characters";
 
 export const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ export const router = createBrowserRouter([
             element: <ProductDetails />,
           },
         ],
+      },
+      {
+        path: "Characters",
+        element: <Characters/>
       },
     ],
   },

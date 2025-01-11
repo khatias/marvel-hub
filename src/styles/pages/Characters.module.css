@@ -1,0 +1,89 @@
+.charactersContainer {
+  padding: 60px 16px 16px 20px;
+  margin-bottom: 60px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.characterCard {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  border-radius: 4px;
+  border-bottom-right-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background-color: #151515;
+}
+
+.characterImage {
+  position: relative;
+  overflow: hidden;
+  height: 170px;
+  width: 100%;
+  object-position: top center;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  margin-bottom: -4px;
+}
+
+.characterCard:hover .characterImage {
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+.characterContent {
+  padding: 12px 15px 20px 15px;
+  background-color: #202020;
+  color: white;
+  border-top: 5px solid #c72227;
+  height: 145px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+  border-bottom-right-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.characterCard:hover .characterContent {
+  background-color: #c72227;
+}
+
+.characterName {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  transition: color 0.3s ease;
+}
+
+.viewDetailsButt {
+  border: none;
+  background: transparent;
+  color: #bbb;
+  text-align: start;
+  font-weight: bold;
+  font-size: 14px;
+  transition: color 0.3s ease;
+}
+
+.viewDetailsButt:hover {
+  color: white;
+}
+
+.characterCard:hover {
+  transform: scale(1.05);
+}
+
+@media screen and (min-width: 769px) {
+  .charactersContainer {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .charactersContainer {
+    margin: 0 auto;
+    max-width: 1280px;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  }
+}
