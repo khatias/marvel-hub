@@ -14,20 +14,19 @@ export const getProducts = async (offset = 0) => {
     const response = await fetch(BASE_URL);
     if (!response.ok) throw new Error("Failed to fetch products.");
     const data = await response.json();
-    
-   
-    const filteredData = data.data.results.filter(product => 
-      product.thumbnail.path !== "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available"
+
+    const filteredData = data.data.results.filter(
+      (product) =>
+        product.thumbnail.path !==
+        "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available"
     );
 
-    console.log(filteredData);  // Optionally, log the filtered data
-    return { ...data, data: { ...data.data, results: filteredData } };  // Return the filtered data
+    console.log(filteredData);
+    return { ...data, data: { ...data.data, results: filteredData } };
   } catch (error) {
     console.error("Error fetching products:", error);
   }
 };
-
-
 
 export const getSingleProduct = async (id) => {
   const ts = Date.now();
@@ -39,9 +38,34 @@ export const getSingleProduct = async (id) => {
     if (!response.ok) throw new Error(`Failed to fetch product with id: ${id}`);
     const data = await response.json();
     console.log(data);
-    return data; // Ensure data is returned
+    return data;
   } catch (error) {
     console.error(`Error fetching product with id ${id}:`, error);
-    return null; // Return null in case of error
+    return null;
+  }
+};
+
+export const fetchComicsByTitle = async (title) => {
+  const ts = Date.now();
+  const hash = generateHash(ts);
+  const BASE_URL = `https://gateway.marvel.com:443/v1/public/comics?titleStartsWith=${encodeURIComponent(
+    title
+  )}&ts=${ts}&apikey=${publicKey}&hash=${hash}`;
+
+  try {
+    const response = await fetch(BASE_URL);
+    if (!response.ok) throw new Error("Failed to fetch related comics.");
+    const data = await response.json();
+
+    const filteredComics = data.data.results.filter(
+      (comic) =>
+        comic.thumbnail.path !==
+        "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available"
+    );
+
+    return filteredComics;
+  } catch (error) {
+    console.error("Error fetching comics:", error);
+    throw error;
   }
 };

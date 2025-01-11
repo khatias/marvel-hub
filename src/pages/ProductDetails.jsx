@@ -8,6 +8,7 @@ import Error from "../components/Error/Error";
 import CreatorsList from "../components/comics/CreatorList/CreatorList";
 import CharactersList from "../components/comics/CharactersList/CharactersList";
 import PriceDetails from "../components/comics/PriceDetails/PriceDetails";
+import RelatedComicsSlider from "../components/Sliders/RelitedComicsSlider";
 
 const formatDate = (dateString) => {
   const options = { year: "numeric", month: "long", day: "numeric" };
@@ -26,7 +27,15 @@ const ProductDetails = () => {
         setLoading(true);
         setError(null);
         const data = await getSingleProduct(id);
-        setComic(data?.data?.results?.[0] || null);
+        const fetchedComic = data?.data?.results?.[0] || null;
+
+        if (fetchedComic) {
+          const storyIds = fetchedComic?.stories?.items?.map(
+            (item) => item.resourceURI.split("/").pop()
+          ) || [];
+          console.log("Extracted storyIds:", storyIds);
+          setComic({ ...fetchedComic, storyIds });
+        }
       } catch (error) {
         setError("Failed to load product details. Please try again.");
         console.error(error);
@@ -53,41 +62,48 @@ const ProductDetails = () => {
   if (!comic) return <p>No comic found.</p>;
 
   return (
-    <div className={styles.pageWrapper}>
-      <div className={styles.backgroundContainer}>
-        <div className={styles.backgroundImageWrapper}>
-          <img
-            src={`${comic.thumbnail.path}.${comic.thumbnail.extension}`}
-            alt={comic.title}
-            className={styles.bgImage}
-          />
-        </div>
-        <div className={styles.comicContainer}>
-          <div className={styles.imageContainer}>
+    <div>
+      <div className={styles.pageWrapper}>
+        <div className={styles.backgroundContainer}>
+          <div className={styles.backgroundImageWrapper}>
             <img
               src={`${comic.thumbnail.path}.${comic.thumbnail.extension}`}
               alt={comic.title}
-              className={styles.comicImage}
+              className={styles.bgImage}
             />
           </div>
-          <div className={styles.contentContainer}>
-            <h2 className={styles.comicTitle}>{comic.title}</h2>
-            <h3 className={styles.publisDate}>
-              {" "}
-              <span>Publish Date: </span>
-              {formatDate(comic.dates[0].date)}
-            </h3>
+          <div className={styles.comicContainer}>
+            <div className={styles.imageContainer}>
+              <img
+                src={`${comic.thumbnail.path}.${comic.thumbnail.extension}`}
+                alt={comic.title}
+                className={styles.comicImage}
+              />
+            </div>
+            <div className={styles.contentContainer}>
+              <h2 className={styles.comicTitle}>{comic.title}</h2>
+              <h3 className={styles.publisDate}>
+                <span>Publish Date: </span>
+                {formatDate(comic.dates[0].date)}
+              </h3>
 
-            <CreatorsList creators={groupedCreators} />
-            <p className={styles.comicDescription}>{comic.description}</p>
+              <CreatorsList creators={groupedCreators} />
+              <p className={styles.comicDescription}>{comic.description}</p>
 
-            <CharactersList characters={comic.characters} />
+              <CharactersList characters={comic.characters} />
 
-            <PriceDetails prices={comic.prices} />
-            <GoBackButton />
+              <PriceDetails prices={comic.prices} />
+              <GoBackButton />
+            </div>
           </div>
         </div>
       </div>
+      
+      <div>
+       
+      </div>
+      <RelatedComicsSlider title={comic.title.split("(")[0].trim()} />
+
     </div>
   );
 };
