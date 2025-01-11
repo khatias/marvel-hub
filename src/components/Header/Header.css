@@ -24,6 +24,7 @@ header {
     background-color: #151515;
     color: white;
     transition: left 0.5s ease;
+    z-index: 100;
   }
   
   .side-nav.open {

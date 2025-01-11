@@ -1,5 +1,5 @@
 import React from "react";
-import './LoadMoreButton.css'
+import '../CustomButton.css'
 const LoadMoreButton = ({ onClick, isLoading }) => {
   return (
     <button className="loadmore-button"

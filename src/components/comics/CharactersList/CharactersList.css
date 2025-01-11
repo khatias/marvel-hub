@@ -1,0 +1,19 @@
+.characters-list {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+
+.character-role
+ {
+  font-size: 13px;
+  font-weight: 400;
+}
+
+ .characters-title {
+    margin-top: 20px;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+  }

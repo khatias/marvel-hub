@@ -1,0 +1,22 @@
+.creators-list{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+.creators {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.creators-role{
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1px;
+    font-size: 14px;
+}
+
+.creator-name {
+  font-size: 13px;
+  font-weight: 400;
+}
