@@ -1,0 +1,132 @@
+.charCardHeader {
+  background-color: #151515;
+  clip-path: polygon(0 0, 0 99%, 100% 95%, 100% 0);
+  padding-bottom: 20px;
+}
+
+.charInfo {
+  padding: 40px 30px;
+  color: white;
+  overflow: hidden;
+  word-wrap: break-word;
+}
+
+.charName {
+  position: relative;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 24px 0;
+  font-size: 1.5rem;
+}
+
+.charImage {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.charDescription {
+  margin-top: 20px;
+  line-height: 1.6;
+  font-size: 1rem;
+  max-height: 300px;
+  overflow-y: auto;
+  padding: 10px;
+  background-color: #333333;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px #333333;
+}
+
+.sectionTitle {
+  font-size: 24px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #151515 60%, #333333);
+  clip-path: polygon(0 0, 0 100%, 100% 85%, 100% 0);
+  padding: 40px 20px;
+  color: #f1f1f1;
+  text-align: center;
+  position: relative;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 8px var(--shadow-color);
+  transition: all 0.3s ease;
+}
+
+.sectionTitle:hover {
+  background: linear-gradient(135deg, #f1f1f1 60%, #333333);
+}
+
+.seriesWrapper {
+  padding: 16px;
+  padding-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.seriesWrapper li {
+  letter-spacing: 1px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #333333;
+  transition: color 0.3s ease;
+}
+
+@media (min-width: 768px) {
+  .charCardHeaderWrapper {
+    background-color: #151515;
+    clip-path: polygon(0 0, 0 99%, 100% 88%, 100% 0);
+  }
+  .charCardHeader {
+    display: flex;
+    justify-content: flex-start;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+  .charImage {
+    max-width: 50%;
+    object-fit: cover;
+    margin: 0;
+  }
+  .sectionTitle {
+    font-size: 26px;
+    padding: 12px;
+    letter-spacing: 1.5px;
+    background: none;
+    color: white;
+    font-weight: 600;
+    margin-bottom: 16px;
+    transition: color 0.3s ease;
+    background-color: black;
+  }
+
+  .sectionTitle:hover {
+    color: #151515;
+  }
+
+  .seriesWrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: flex-start;
+    padding: 16px;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  .seriesWrapper li {
+    font-size: 14px;
+    font-weight: 400;
+    color: #666666;
+    margin: 4px 8px;
+    text-align: center;
+    transition: color 0.3s ease;
+  }
+
+  .seriesWrapper li:hover {
+    color: #f1f1f1;
+  }
+}

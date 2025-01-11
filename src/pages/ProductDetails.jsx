@@ -8,8 +8,8 @@ import Error from "../components/Error/Error";
 import CreatorsList from "../components/comics/CreatorList/CreatorList";
 import CharactersList from "../components/comics/CharactersList/CharactersList";
 import PriceDetails from "../components/comics/PriceDetails/PriceDetails";
-import RelatedComicsSlider from "../components/Sliders/RelitedComicsSlider";
-
+import ComicsSlider from "../components/Sliders/ComicsSlider";
+import { fetchComicsByTitle } from "../services/api";
 const formatDate = (dateString) => {
   const options = { year: "numeric", month: "long", day: "numeric" };
   return new Date(dateString).toLocaleDateString(undefined, options);
@@ -30,9 +30,10 @@ const ProductDetails = () => {
         const fetchedComic = data?.data?.results?.[0] || null;
 
         if (fetchedComic) {
-          const storyIds = fetchedComic?.stories?.items?.map(
-            (item) => item.resourceURI.split("/").pop()
-          ) || [];
+          const storyIds =
+            fetchedComic?.stories?.items?.map((item) =>
+              item.resourceURI.split("/").pop()
+            ) || [];
           console.log("Extracted storyIds:", storyIds);
           setComic({ ...fetchedComic, storyIds });
         }
@@ -98,12 +99,14 @@ const ProductDetails = () => {
           </div>
         </div>
       </div>
-      
-      <div>
-       
-      </div>
-      <RelatedComicsSlider title={comic.title.split("(")[0].trim()} />
 
+      <div></div>
+      {/* <RelatedComicsSlider title={comic.title.split("(")[0].trim()} /> */}
+      <ComicsSlider
+        fetchComics={fetchComicsByTitle}
+        title={comic.title.split("(")[0].trim()}
+        SliderTitle={`Explore the World of ${comic.title.split("(")[0].trim()}`}
+      />
     </div>
   );
 };

@@ -39,16 +39,16 @@ const Characters = () => {
     setOffset((prevOffset) => prevOffset + 20);
   };
 
-  if (loading) return <Loader />;
+  if (loading && characters.length === 0) return <Loader />;
   if (error)
     return <Error message={error} onRetry={() => window.location.reload()} />;
 
   return (
     <main>
-      <h1>Characters</h1>
       <div className={styles.charactersContainer}>
-        {characters.map((character) => (
-          <div className={styles.characterCard} key={character.id}>
+        {characters.map((character, index) => (
+          <div className={styles.characterCard} key={index}>
+        
             <img
               src={`${character.thumbnail.path}.${character.thumbnail.extension}`}
               alt={character.name}

@@ -4,6 +4,7 @@ import Home from "../pages/Home";
 import { createBrowserRouter } from "react-router-dom";
 import Layout from "../components/Layout/Layout";
 import Characters from "../pages/Characters";
+import CharactersDetails from "../pages/CharactersDetails";
 
 export const router = createBrowserRouter([
   {
@@ -31,7 +32,16 @@ export const router = createBrowserRouter([
       },
       {
         path: "Characters",
-        element: <Characters/>
+        children: [
+          {
+            index: true,
+            element: <Characters />,
+          },
+          {
+            path: ":id",
+            element: <CharactersDetails/>
+          },
+        ],
       },
     ],
   },

@@ -94,6 +94,35 @@
   .slide {
     width: 30%;
   }
+  .slider-controls {
+    top: 40px;
+    justify-content: end;
+    gap: 8px;
+  }
+  .slider-button {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 6px;
+    border-radius: 4%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .slider-button:hover {
+    background-color: rgb(203, 33, 33);
+    transform: scale(1.1);
+  }
+
+  .slider-button:disabled {
+    background-color: rgb(225, 174, 174);
+    cursor: not-allowed;
+    box-shadow: none;
+  }
 }
 
 @media screen and (min-width: 1440px) {
