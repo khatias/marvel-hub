@@ -1,13 +1,15 @@
 header {
   background-color: #202020;
-  padding: 10px 16px;
+}
+.greeting {
+  display: none;
 }
 .icon {
   color: white;
   width: 28px;
   height: 28px;
 }
-.seassion-buttons {
+.session-buttons {
   display: flex;
   gap: 16px;
   justify-content: center;
@@ -21,6 +23,10 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 10px 16px;
+  border-bottom: 1px solid #393939;
+  max-width: 1280px;
+  margin: 0 auto;
 }
 
 .side-nav {
@@ -63,7 +69,37 @@ header {
 }
 
 @media screen and (min-width: 768px) {
-  /* .mobile-menu{
-  display: none;
-} */
+  .burger-button {
+    display: none;
+  }
+  .greeting {
+    display: flex;
+    color: white;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 2px;
+    padding: 18 0px;
+  }
+  .header-bottom-container{
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+  .desktop-nav-list{
+    display: flex;
+    justify-content: flex-start;
+    gap:70px;
+    padding: 8px 0px;
+  }
+  .desktop-nav-list li{
+font-size: 14px;
+text-transform: uppercase;
+font-weight: bold;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .header-top-container {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
 }

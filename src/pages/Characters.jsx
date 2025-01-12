@@ -12,6 +12,7 @@ const Characters = () => {
   const [error, setError] = useState(null);
   const [offset, setOffset] = useState(0);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
+  
   const navigate = useNavigate();
 
   useEffect(() => {

@@ -11,16 +11,16 @@ const Drawer = ({ isOpen, onclose }) => {
       <nav>
         <ul className="mobile-nav-list">
           <li>
-            <Link to="/"> Home </Link>
+            <Link to="/" onClick={onclose}>Home</Link>
           </li>
           <li>
-          <Link to="/products"> products </Link>
+            <Link to="/products" onClick={onclose}>Products</Link>
           </li>
-         
           <li>
-          <Link to="/characters"> characters </Link>
+            <Link to="/characters" onClick={onclose}>Characters</Link>
           </li>
-          <li>          <Link to="/favorites"> favorites </Link>
+          <li>
+            <Link to="/favorites" onClick={onclose}>Favorites</Link>
           </li>
         </ul>
       </nav>

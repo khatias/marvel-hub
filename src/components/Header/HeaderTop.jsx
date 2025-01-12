@@ -6,7 +6,7 @@ import Drawer from "./Drawer";
 import { LoginIcon, LogoutIcon, UserIcon } from "@heroicons/react/outline";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { getAuthToken, removeAuthToken } from "../../utils/authUtils";
+import { getAuthToken, removeAuthToken, removeUserName, getUserName } from "../../utils/authUtils";
 import { openSideNav, closeSideNav } from "../../utils/sideNavUtils";
 
 const HeaderTop = () => {
@@ -14,24 +14,34 @@ const HeaderTop = () => {
   const navigate = useNavigate();
 
   const isAuthenticated = getAuthToken();
+  const username = getUserName();
 
   const handleLogout = () => {
     removeAuthToken();
+    removeUserName();
     navigate("/login");
   };
 
   return (
     <div className="header-top-container">
-      <button onClick={() => openSideNav(setSideNavOpen)}>
+      <button className="burger-button" onClick={() => openSideNav(setSideNavOpen)}>
         <MenuIcon className="burger-icon icon" />
       </button>
+      
+      <span className="greeting">
+        {username ? `Hello, ${username}` : "Welcome, Guest"}
+      </span>
+      
       <Link to="/">
         <img src={MarvelLogo} alt="Marvel Logo" />
       </Link>
-      <div className="drawer-container">
-      <Drawer isOpen={isSideNavOpen} onclose={() => closeSideNav(setSideNavOpen)} />
-      </div>
-      <div className="seassion-buttons">
+
+      <Drawer
+        isOpen={isSideNavOpen}
+        onclose={() => closeSideNav(setSideNavOpen)}
+      />
+
+      <div className="session-buttons">
         {isAuthenticated && (
           <div>
             <Link to="/Profile">

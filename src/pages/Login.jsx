@@ -28,6 +28,7 @@ const Login = () => {
           } else {
             console.log(data);
             localStorage.setItem("authTokenMarvel", data.accessToken);
+            localStorage.setItem("username", data.username);
             navigate("/products"); 
           }
         });
