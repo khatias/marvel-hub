@@ -1,5 +1,7 @@
 import React from 'react';
 import "./Hero.css"; 
+import { Link } from 'react-router-dom';
+
 
 const Hero = () => {
   return (
@@ -9,8 +11,8 @@ const Hero = () => {
           <h1 className="hero-title">Unleash the Marvel Universe!</h1>
           <p className="hero-tagline">Comics, Stories, and Exclusive Content – Dive into the Adventure.</p>
           <div className="hero-buttons">
-            <button className="hero-btn primary-btn">Explore Comics</button>
-            <button className="hero-btn secondary-btn">Join the Action</button>
+            <Link to='/products' className="hero-btn primary-btn">Explore Comics</Link>
+            <Link to='./login' className="hero-btn secondary-btn">Join the Action</Link>
           </div>
         </div>
       </div>

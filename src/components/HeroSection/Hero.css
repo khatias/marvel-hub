@@ -67,3 +67,10 @@
   background-color: #fbe9e7;
   transform: scale(1.05);
 }
+
+@media screen and (min-width: 768px) {
+  .hero-container {
+    background: url("../../assets/wallpaper.jpeg") no-repeat;
+    background-size: cover;
+  }
+}
