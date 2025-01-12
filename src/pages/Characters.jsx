@@ -5,6 +5,7 @@ import LoadMoreButton from "../components/buttons/LoadMoreButton/LoadMoreButton"
 import styles from "../styles/pages/Characters.module.css";
 import Loader from "../components/Loader/Loader";
 import Error from "../components/Error/Error";
+import { Link } from "react-router-dom";
 const Characters = () => {
   const [characters, setCharacters] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -48,22 +49,23 @@ const Characters = () => {
       <div className={styles.charactersContainer}>
         {characters.map((character, index) => (
           <div className={styles.characterCard} key={index}>
-        
-            <img
-              src={`${character.thumbnail.path}.${character.thumbnail.extension}`}
-              alt={character.name}
-              className={styles.characterImage}
-            />
-            <div className={styles.characterContent}>
-              <h3 className={styles.characterName}>{character.name}</h3>
+            <Link to={`/characters/${character.id}`}>
+              <img
+                src={`${character.thumbnail.path}.${character.thumbnail.extension}`}
+                alt={character.name}
+                className={styles.characterImage}
+              />
+              <div className={styles.characterContent}>
+                <h3 className={styles.characterName}>{character.name}</h3>
 
-              <button
-                className={styles.viewDetailsButt}
-                onClick={() => navigate(`/characters/${character.id}`)}
-              >
-                View Details
-              </button>
-            </div>
+                <button
+                  className={styles.viewDetailsButt}
+                  onClick={() => navigate(`/characters/${character.id}`)}
+                >
+                  View Details
+                </button>
+              </div>
+            </Link>
           </div>
         ))}
       </div>

@@ -84,7 +84,7 @@ const ProductDetails = () => {
             <div className={styles.contentContainer}>
               <h2 className={styles.comicTitle}>{comic.title}</h2>
               <h3 className={styles.publisDate}>
-                <span>Publish Date: </span>
+                <span>On Sale Date: </span>
                 {formatDate(comic.dates[0].date)}
               </h3>
 
@@ -100,8 +100,6 @@ const ProductDetails = () => {
         </div>
       </div>
 
-      <div></div>
-      {/* <RelatedComicsSlider title={comic.title.split("(")[0].trim()} /> */}
       <ComicsSlider
         fetchComics={fetchComicsByTitle}
         title={comic.title.split("(")[0].trim()}

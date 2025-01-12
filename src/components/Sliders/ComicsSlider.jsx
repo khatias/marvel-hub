@@ -1,5 +1,5 @@
 import "./ComicsSlider.css";
-
+import { Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/outline";
 import { useNavigate } from "react-router-dom";
@@ -58,21 +58,13 @@ const ComicsSlider = ({ fetchComics, title, characterId, SliderTitle }) => {
     }
   };
 
-  const handleProductDetailClick = (productId) => {
-    navigate(`/products/${productId}`);
-  };
-
-  const shouldShowButtons = comics.length > visibleSlides;
-
   if (loading) return <SmallLoader />;
   if (error) return <p>{error}</p>;
 
   return (
     <div className="slider-wrapper">
       <div className="slider-container">
-        <h2 className="slider-title">
-          {SliderTitle}
-        </h2>
+        <h2 className="slider-title">{SliderTitle}</h2>
         <div className="slider">
           {comics.map((comic) => (
             <div
@@ -82,15 +74,17 @@ const ComicsSlider = ({ fetchComics, title, characterId, SliderTitle }) => {
                 transform: `translateX(-${currentSlide * 100}%)`,
               }}
             >
-              <img
-                src={`${comic.thumbnail.path}.${comic.thumbnail.extension}`}
-                alt={comic.title}
-                className="slide-image"
-              />
-              <p className="comic-title">{comic.title}</p>
+              <Link to={`/products/${comic.id}`} className="comic-title">
+                <img
+                  src={`${comic.thumbnail.path}.${comic.thumbnail.extension}`}
+                  alt={comic.title}
+                  className="slide-image"
+                />
+                <p className="comic-title">{comic.title}</p>
+              </Link>
               <button
                 className="see-detail"
-                onClick={() => handleProductDetailClick(comic.id)}
+                onClick={() => navigate(`/products/${comic.id}`)}
               >
                 View Details
               </button>
@@ -98,7 +92,7 @@ const ComicsSlider = ({ fetchComics, title, characterId, SliderTitle }) => {
           ))}
         </div>
 
-        {shouldShowButtons && (
+        {comics.length > visibleSlides && (
           <div className="slider-controls">
             <button
               onClick={handlePrevSlide}

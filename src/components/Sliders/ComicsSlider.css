@@ -39,6 +39,8 @@
   font-size: 14px;
   font-weight: bold;
   min-height: 45px;
+  text-decoration: none;
+  color:black;
 }
 
 .slider-controls {

@@ -78,8 +78,16 @@
   gap: 10px;
   color: #d1d1d1;
 }
-
-.publisDate span {
+.price {
+  font-size: 12px;
+  line-height: 20px;
+  font-weight: 400;
+  display: flex;
+  gap: 10px;
+  color: #d1d1d1;
+}
+.publisDate span,
+.priceType {
   text-transform: uppercase;
   font-weight: bold;
 }
