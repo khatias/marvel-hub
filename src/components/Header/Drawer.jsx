@@ -1,6 +1,6 @@
 import React from "react";
 import { XIcon } from "@heroicons/react/solid";
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Drawer = ({ isOpen, onclose }) => {
   return (
@@ -13,9 +13,15 @@ const Drawer = ({ isOpen, onclose }) => {
           <li>
             <Link to="/"> Home </Link>
           </li>
-          <Link to='/products'> products  </Link>
-          <li>About</li>
-          <li>Contact</li>
+          <li>
+          <Link to="/products"> products </Link>
+          </li>
+         
+          <li>
+          <Link to="/characters"> characters </Link>
+          </li>
+          <li>          <Link to="/favorites"> favorites </Link>
+          </li>
         </ul>
       </nav>
     </div>

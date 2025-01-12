@@ -1,11 +1,11 @@
 import React from "react";
 import "./Header.css";
-import MobileMenu from "./MobileMenu";
+import HeaderTop from "./HeaderTop";
 
 const Header = () => {
   return (
     <header>
-      <MobileMenu />
+      <HeaderTop />
     </header>
   );
 };
