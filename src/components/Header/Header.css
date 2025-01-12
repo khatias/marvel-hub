@@ -4,10 +4,16 @@ header {
   }
   .icon {
     color: white;
-    width: 24px;
-    height: 24px;
+    width: 28px;
+    height: 28px;
   }
-  .burger-button {
+  .mobile-buttons{
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    align-items: center;
+  }
+  .mobile-nav-button {
     background: none;
     border: none;
   }
@@ -55,3 +61,10 @@ header {
     text-transform: uppercase;
     color: white;
   }
+  .logout-btn{
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
