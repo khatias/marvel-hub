@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getProducts } from "../services/api";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import ComicCard from "../components/comics/ComicCard";
 import styles from "../styles/pages/Product.module.css";
 import LoadMoreButton from "../components/buttons/LoadMoreButton/LoadMoreButton";
@@ -13,6 +13,9 @@ const Products = () => {
   const [error, setError] = useState(null);
   const [offset, setOffset] = useState(0);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
+  const [searchParams] = useSearchParams();
+  const searchTerm = searchParams.get("search") || "";
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -35,6 +38,12 @@ const Products = () => {
     fetchProducts();
   }, [offset]);
 
+  const filteredProducts = searchTerm
+    ? products.filter((product) =>
+        product.title.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    : products;
+
   if (loading && products.length === 0) return <Loader />;
 
   if (error)
@@ -52,14 +61,12 @@ const Products = () => {
   return (
     <main>
       <div className={styles.productContainer}>
-        {products.map((product, index) => (
-        
+        {filteredProducts.map((product, index) => (
           <ComicCard
             key={index}
             product={product}
             onViewDetail={handleProductDetailClick}
           />
-    
         ))}
       </div>
       <LoadMoreButton onClick={handleLoadMore} isLoading={isLoadingMore} />

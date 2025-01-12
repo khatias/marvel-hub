@@ -1,7 +1,19 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
+import Search from "../Search/Search";
 
 const HeaderBottom = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const searchTerm = searchParams.get("search") || "";
+
+  const handleSearchChange = (value) => {
+    setSearchParams({ search: value });
+  };
+
+  const handleClearSearch = () => {
+    setSearchParams({ search: "" });
+  };
+
   return (
     <div className="header-bottom-container">
       <nav>
@@ -23,6 +35,11 @@ const HeaderBottom = () => {
           </li>
         </ul>
       </nav>
+      <Search
+        value={searchTerm}
+        onChange={handleSearchChange}
+        onClear={handleClearSearch}
+      />
     </div>
   );
 };
