@@ -3,7 +3,7 @@ import { useState } from "react";
 import MarvelLogo from "../../assets/marvelLogo.svg";
 import React from "react";
 import Drawer from "./Drawer";
-import { LoginIcon, LogoutIcon, UserIcon } from "@heroicons/react/outline"; // Added UserIcon
+import { LoginIcon, LogoutIcon, UserIcon } from "@heroicons/react/outline"; 
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
@@ -40,7 +40,9 @@ const MobileMenu = () => {
       <div className="mobile-buttons">
       {isAuthenticated && (
           <div className="user-info">
+            <Link to="/Profile">
             <UserIcon className="icon text-green-500" />
+            </Link>
           </div>
         )}
         {isAuthenticated ? (

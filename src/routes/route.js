@@ -6,6 +6,7 @@ import Layout from "../components/Layout/Layout";
 import Characters from "../pages/Characters";
 import CharactersDetails from "../pages/CharactersDetails";
 import Login from "../pages/Login";
+import Profile from "../pages/Profile";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -46,6 +47,10 @@ export const router = createBrowserRouter([
       {
         path: "Login",
         element: <Login />,
+      },
+      {
+        path: "Profile",
+        element: <Profile />,
       },
     ],
   },
