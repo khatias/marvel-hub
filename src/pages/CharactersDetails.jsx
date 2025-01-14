@@ -4,6 +4,8 @@ import { getSingleCharacter } from "../services/api";
 import styles from "../styles/pages/CharacterDetail.module.css";
 import { fetchComicsByCharacter } from "../services/api";
 import ComicsSlider from "../components/Sliders/ComicsSlider";
+import { HeartIcon } from "@heroicons/react/outline";
+import { addToFavorites } from "../utils/favoritesUtils";
 const CharactersDetails = () => {
   const { id } = useParams();
   const [character, setCharacter] = useState(null);
@@ -49,6 +51,9 @@ const CharactersDetails = () => {
         <div className={styles.charInfo}>
           <h1 className={styles.charName}>{character.name}</h1>
           <p>{character.description || "No description available."}</p>
+          <button className={styles.favoriteButton} onClick={() => addToFavorites(character)}>
+                <HeartIcon className={styles.icon} /> Add To Favorites
+              </button>
         </div>
         </div>
       </div>

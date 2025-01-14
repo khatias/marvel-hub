@@ -1,19 +1,24 @@
 import React, { useState, useEffect } from "react";
 import styles from "../styles/pages/Favorites.module.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { removeFromFavorites } from "../utils/favoritesUtils";
 
 const Favorites = () => {
   const [favorites, setFavorites] = useState([]);
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const searchTerm = searchParams.get("search") || "";
 
-  const handleProductDetailClick = (productId) => {
-    navigate(`/products/${productId}`);
+  const handleDetailClick = (favorite) => {
+    if (favorite.name) {
+      navigate(`/characters/${favorite.id}`);
+    } else {
+      navigate(`/products/${favorite.id}`);
+    }
   };
 
   const handleRemoveFavorite = (product) => {
     removeFromFavorites(product);
-
     setFavorites((prevFavorites) =>
       prevFavorites.filter((fav) => fav.id !== product.id)
     );
@@ -33,21 +38,30 @@ const Favorites = () => {
     setFavorites(storedFavorites);
   }, []);
 
+  const filteredProducts = searchTerm
+    ? favorites.filter((favorite) =>
+        (favorite.title?.toLowerCase() || "").includes(searchTerm.toLowerCase()) || 
+        (favorite.name?.toLowerCase() || "").includes(searchTerm.toLowerCase())
+      )
+    : favorites;
+
   return (
     <div className={styles.favoritesWrapper}>
       <div className={styles.favoriteList}>
         {favorites.length === 0 ? (
           <p>No favorites added yet</p>
+        ) : filteredProducts.length === 0 ? (
+          <p>No items match your search.</p>
         ) : (
-          favorites.map((favorite, index) => (
+          filteredProducts.map((favorite, index) => (
             <div key={favorite.id || index} className={styles.favoriteItem}>
               <img
                 src={`${favorite.thumbnail.path}.${favorite.thumbnail.extension}`}
-                alt={favorite.title}
+                alt={favorite.name || favorite.title}
                 className={styles.favoriteImage}
               />
               <div className={styles.cardContent}>
-                <p>{favorite.title}</p>
+                <p>{favorite.name || favorite.title}</p>
                 {favorite.prices && favorite.prices.length > 0 ? (
                   <ul>
                     {favorite.prices.map((price, priceIndex) => (
@@ -57,11 +71,11 @@ const Favorites = () => {
                     ))}
                   </ul>
                 ) : (
-                  <p>No price information available</p>
+                  ""
                 )}
               </div>
               <div className={styles.favoritesButtons}>
-                <button onClick={() => handleProductDetailClick(favorite.id)}>
+                <button onClick={() => handleDetailClick(favorite)}>
                   View Details
                 </button>
                 <button onClick={() => handleRemoveFavorite(favorite)}>
