@@ -15,7 +15,7 @@ const HeaderBottom = () => {
   };
 
   return (
-    <div className="header-bottom-container">
+    <div className=" container hb-container">
       <nav>
         <ul className="desktop-nav-list">
           <li>

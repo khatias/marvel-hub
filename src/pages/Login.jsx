@@ -43,7 +43,11 @@ const Login = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <button className={styles.formButton} type="submit">
+          <button
+            className="custom-button"
+            style={{ padding: "12px 50px" }}
+            type="submit"
+          >
             Login
           </button>
         </form>

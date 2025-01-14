@@ -23,7 +23,7 @@ const HeaderTop = () => {
   };
 
   return (
-    <div className="header-top-container">
+    <div className=" container ht-container">
       <button className="burger-button" onClick={() => openSideNav(setSideNavOpen)}>
         <MenuIcon className="burger-icon icon" />
       </button>

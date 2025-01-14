@@ -1,50 +1,21 @@
 import "./ComicsSlider.css";
 import { Link } from "react-router-dom";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/outline";
 import { useNavigate } from "react-router-dom";
 import SmallLoader from "../Loader/SmallLoader";
+import useFetchComics from "../../hooks/useFetchRelatedComics";
+import useWindowResize from "../../hooks/useWindowResize";
 
 const ComicsSlider = ({ fetchComics, title, characterId, SliderTitle }) => {
-  const [comics, setComics] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const { comics, loading, error } = useFetchComics(
+    fetchComics,
+    title,
+    characterId
+  );
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [visibleSlides, setVisibleSlides] = useState(1);
+  const visibleSlides = useWindowResize();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const fetchRelatedComics = async () => {
-      setLoading(true);
-      setError(null);
-      try {
-        const comicsData = await fetchComics(title || characterId);
-        setComics(comicsData);
-      } catch (err) {
-        setError("Failed to load related comics.");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchRelatedComics();
-  }, [fetchComics, title, characterId]);
-
-  useEffect(() => {
-    const calculateVisibleSlides = () => {
-      if (window.innerWidth < 768) {
-        setVisibleSlides(1);
-      } else if (window.innerWidth < 1024) {
-        setVisibleSlides(2);
-      } else {
-        setVisibleSlides(3);
-      }
-    };
-
-    calculateVisibleSlides();
-    window.addEventListener("resize", calculateVisibleSlides);
-    return () => window.removeEventListener("resize", calculateVisibleSlides);
-  }, []);
 
   const handlePrevSlide = () => {
     if (currentSlide > 0) {
@@ -63,7 +34,7 @@ const ComicsSlider = ({ fetchComics, title, characterId, SliderTitle }) => {
 
   return (
     <div className="slider-wrapper">
-      <div className="slider-container">
+      <div className="container slider-container">
         <h2 className="slider-title">{SliderTitle}</h2>
         <div className="slider">
           {comics.map((comic) => (

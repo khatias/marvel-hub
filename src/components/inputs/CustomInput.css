@@ -10,7 +10,7 @@
   outline: none;
   transition: background-color 0.3s ease;
 }
-input:focus {
+.input-field:focus {
   background-color: #444;
   border-color: #f1c40f;
 }

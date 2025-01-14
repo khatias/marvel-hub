@@ -1,14 +1,12 @@
 import React from "react";
 import { SearchIcon, XIcon } from "@heroicons/react/outline";
 import "./Search.css";
-
+import CustomInput from "../inputs/CustomInput";
 const Search = ({ value, onChange, onClear }) => {
   return (
     <div className="search-container">
       <SearchIcon className="search-icon" />
-
-      <input
-        type="text"
+      <CustomInput
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder="Search..."

@@ -1,35 +1,23 @@
 header {
   background-color: #202020;
 }
-.header-bottom-container {
-  display: none;
-}
+.hb-container,
 .greeting {
   display: none;
 }
-.icon {
-  color: white;
-  width: 28px;
-  height: 28px;
-}
+
 .session-buttons {
   display: flex;
   gap: 16px;
   justify-content: center;
   align-items: center;
 }
-.mobile-nav-button {
-  background: none;
-  border: none;
-}
-.header-top-container {
+
+.ht-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 16px;
   border-bottom: 1px solid #393939;
-  max-width: 1280px;
-  margin: 0 auto;
 }
 
 .side-nav {
@@ -52,10 +40,6 @@ header {
 }
 
 .close-btn {
-  background: none;
-  border: none;
-  color: white;
-  cursor: pointer;
   position: relative;
   left: 90%;
   top: 20px;
@@ -65,7 +49,6 @@ header {
 }
 .mobile-nav-list li {
   padding: 10px 20px;
-  cursor: pointer;
   font-weight: 700;
   text-transform: uppercase;
   color: white;
@@ -83,9 +66,7 @@ header {
     letter-spacing: 2px;
     padding: 18 0px;
   }
-  .header-bottom-container {
-    max-width: 1280px;
-    margin: 0 auto;
+  .hb-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -94,18 +75,9 @@ header {
     display: flex;
     justify-content: flex-start;
     gap: 70px;
-    /* padding: 8px 0px; */
   }
   .desktop-nav-list li {
-    font-size: 14px;
     text-transform: uppercase;
     font-weight: bold;
-  }
-}
-
-@media screen and (min-width: 1440px) {
-  .header-top-container {
-    padding-left: 0px;
-    padding-right: 0px;
   }
 }
