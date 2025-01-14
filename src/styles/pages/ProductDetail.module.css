@@ -116,6 +116,26 @@
 .creatorsName {
   font-weight: normal;
 }
+.favoriteButton {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.95rem;
+  color: #e0e0e0;
+  text-transform: uppercase;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+}
+.icon:hover {
+  fill: red;
+  color:Red
+}
 
 @media screen and (min-width: 769px) {
   .comicContainer {

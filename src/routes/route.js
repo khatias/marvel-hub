@@ -7,6 +7,7 @@ import Characters from "../pages/Characters";
 import CharactersDetails from "../pages/CharactersDetails";
 import Login from "../pages/Login";
 import Profile from "../pages/Profile";
+import Favortes from "../pages/Favortes";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -51,6 +52,10 @@ export const router = createBrowserRouter([
       {
         path: "Profile",
         element: <Profile />,
+      },
+      {
+        path: "Favorites",
+        element: <Favortes />,
       },
     ],
   },

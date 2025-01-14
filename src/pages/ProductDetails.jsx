@@ -10,6 +10,8 @@ import CharactersList from "../components/comics/CharactersList/CharactersList";
 import PriceDetails from "../components/comics/PriceDetails/PriceDetails";
 import ComicsSlider from "../components/Sliders/ComicsSlider";
 import { fetchComicsByTitle } from "../services/api";
+import { HeartIcon } from "@heroicons/react/outline";
+import { addToFavorites } from "../utils/favoritesUtils";
 const formatDate = (dateString) => {
   const options = { year: "numeric", month: "long", day: "numeric" };
   return new Date(dateString).toLocaleDateString(undefined, options);
@@ -94,6 +96,9 @@ const ProductDetails = () => {
               <CharactersList characters={comic.characters} />
 
               <PriceDetails prices={comic.prices} />
+              <button className={styles.favoriteButton} onClick={() => addToFavorites(comic)}>
+                <HeartIcon className={styles.icon} /> Add To Favorites
+              </button>
               <GoBackButton />
             </div>
           </div>
@@ -110,3 +115,7 @@ const ProductDetails = () => {
 };
 
 export default ProductDetails;
+
+// const addToFavorites = ({ product }) => {
+//   localStorage.setItem(`favorites:${product.id}`, JSON.stringify(product));
+// };
