@@ -1,8 +1,10 @@
 import React from "react";
-import '../CustomButton.css'
+import '../CustomButton.css';
+
 const LoadMoreButton = ({ onClick, isLoading }) => {
   return (
-    <button className="loadmore-button"
+    <button
+      className="loadmore-button"
       onClick={onClick}
       disabled={isLoading}
       style={{

@@ -8,7 +8,7 @@ const generateHash = (ts) => md5(ts + privateKey + publicKey).toString();
 export const getProducts = async (offset = 0) => {
   const ts = Date.now();
   const hash = generateHash(ts);
-  const BASE_URL = `https://gateway.marvel.com:443/v1/public/comics?offset=${offset}&ts=${ts}&apikey=${publicKey}&hash=${hash}`;
+  const BASE_URL = `https://gateway.marvel.com:443/v1/public/comics?limit=20&hasDigitalIssue=false&offset=${offset}&ts=${ts}&apikey=${publicKey}&hash=${hash}`;
 
   try {
     const response = await fetch(BASE_URL);
@@ -73,7 +73,7 @@ export const fetchComicsByTitle = async (title) => {
 export const getCharacters = async (offset = 0) => {
   const ts = Date.now();
   const hash = generateHash(ts);
-  const BASE_URL = `https://gateway.marvel.com:443/v1/public/characters?limit=50&orderBy=name&offset=${offset}&ts=${ts}&apikey=${publicKey}&hash=${hash}`;
+  const BASE_URL = `https://gateway.marvel.com:443/v1/public/characters?limit=20&orderBy=name&offset=${offset}&ts=${ts}&apikey=${publicKey}&hash=${hash}`;
 
   try {
     const response = await fetch(BASE_URL);

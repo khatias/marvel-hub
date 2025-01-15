@@ -1,0 +1,58 @@
+.not-found-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-top: 50px;
+  align-items: center;
+  height: 80vh;
+  background-color: white;
+  text-align: center;
+  background-image: url("../../assets/error-image.jpg");
+  background-repeat: no-repeat;
+  background-position: bottom;
+  max-width: 1280px;
+  margin: 0 auto;
+  gap: 10px;
+}
+
+.not-found-title {
+  font-size: 28px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: black;
+}
+
+.not-found-message {
+  font-size: 20px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.back-home-button {
+  padding: 10px 20px;
+  background-color: red;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 1.2rem;
+}
+
+.back-home-button:hover {
+  background-color: #f13c14;
+}
+
+@media (min-width: 768px) {
+  .not-found-container {
+    align-items: flex-start;
+    height: 80vh;
+    background-position: center right;
+    padding-top: 0px;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  .not-found-title {
+    font-size: 48px;
+  }
+}

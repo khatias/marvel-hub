@@ -12,7 +12,7 @@ import ComicsSlider from "../components/Sliders/ComicsSlider";
 import { fetchComicsByTitle, getSingleProduct } from "../services/api";
 import { HeartIcon } from "@heroicons/react/outline";
 import { addToFavorites } from "../utils/favoritesUtils";
-
+import NotFound from "../components/NotFound/NotFound";
 const formatDate = (dateString) => {
   const options = { year: "numeric", month: "long", day: "numeric" };
   return new Date(dateString).toLocaleDateString(undefined, options);
@@ -37,7 +37,7 @@ const ProductDetails = () => {
   if (loading) return <Loader />;
   if (error)
     return <Error message={error} onRetry={() => window.location.reload()} />;
-  if (!comic) return <p>No comic found.</p>;
+  if (!comic) return  <NotFound/>;
 
   return (
     <div>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { getCharacters } from "../services/api";
 import LoadMoreButton from "../components/buttons/LoadMoreButton/LoadMoreButton";
@@ -25,9 +25,16 @@ const Characters = () => {
   const navigate = useNavigate();
 
   const handleLoadMore = () => {
+    if (isLoadingMore) return;
     setIsLoadingMore(true);
-    setOffset((prevOffset) => prevOffset + 20);
+    setOffset((prevOffset) => prevOffset + 5);
   };
+
+    useEffect(() => {
+      if (!loading && isLoadingMore) {
+        setIsLoadingMore(false);
+      }
+    }, [loading, isLoadingMore]);
 
   if (loading && characters.length === 0) return <Loader />;
   if (error)

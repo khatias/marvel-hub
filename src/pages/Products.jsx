@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import ComicCard from "../components/comics/ComicCard";
 import styles from "../styles/pages/Product.module.css";
@@ -10,19 +10,26 @@ import useFetchData from "../hooks/useFetchData";
 import { getProducts } from "../services/api";
 
 const Products = () => {
-  const [offset, setOffset] = useState(0);
+  const [offset, setOffset] = useState(10);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [searchParams] = useSearchParams();
   const searchTerm = searchParams.get("search") || "";
 
-  const { data: products, loading, error } = useFetchData(getProducts, offset);
+  const { data: products, loading, error } = useFetchData(getProducts, offset, );
   const filteredProducts = useSearch(products, searchTerm, "title");
   const navigate = useNavigate();
 
   const handleLoadMore = () => {
+    if (isLoadingMore) return;
     setIsLoadingMore(true);
-    setOffset((prevOffset) => prevOffset + 20);
+    setOffset((prevOffset) => prevOffset + 5);
   };
+
+  useEffect(() => {
+    if (!loading && isLoadingMore) {
+      setIsLoadingMore(false);
+    }
+  }, [loading, isLoadingMore]);
 
   if (loading && products.length === 0) return <Loader />;
   if (error)

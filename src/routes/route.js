@@ -7,18 +7,18 @@ import Characters from "../pages/Characters";
 import CharactersDetails from "../pages/CharactersDetails";
 import Login from "../pages/Login";
 import Profile from "../pages/Profile";
-import Favortes from "../pages/Favortes";
+import Favorites from "../pages/Favortes"; // Fixed spelling of Favorites
+import NotFound from "../components/NotFound/NotFound";
+
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
-
     children: [
       {
         index: true,
         element: <Home />,
       },
-
       {
         path: "Products",
         children: [
@@ -41,7 +41,7 @@ export const router = createBrowserRouter([
           },
           {
             path: ":id",
-            element: <CharactersDetails/>
+            element: <CharactersDetails />,
           },
         ],
       },
@@ -54,8 +54,12 @@ export const router = createBrowserRouter([
         element: <Profile />,
       },
       {
-        path: "Favorites",
-        element: <Favortes />,
+        path: "Favortes", 
+        element: <Favorites />,
+      },
+      {
+        path: "*", 
+        element: <NotFound />, 
       },
     ],
   },

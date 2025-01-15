@@ -7,14 +7,14 @@ import ComicsSlider from "../components/Sliders/ComicsSlider";
 import { HeartIcon } from "@heroicons/react/outline";
 import { addToFavorites } from "../utils/favoritesUtils";
 import useFetchSingleEntity from "../hooks/useFetchSingleEntity";
-
+import NotFound from "../components/NotFound/NotFound";
 const CharactersDetails = () => {
   const { id } = useParams();
   const { entity: character, loading, error } = useFetchSingleEntity(getSingleCharacter, id);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
-  if (!character) return <div>No character found.</div>;
+  if (!character) return <NotFound/>;
 
   return (
     <div key={character.id}>
