@@ -1,3 +1,4 @@
+import { getAuthToken } from "../utils/authUtils";
 export const loginUser = async (username, password) => {
   try {
     const response = await fetch("https://dummyjson.com/auth/login", {
@@ -18,6 +19,33 @@ export const loginUser = async (username, password) => {
     return data;
   } catch (error) {
     console.error("Login error:", error);
+    throw error;
+  }
+};
+
+export const fetchProfile  = async () => {
+  const authToken = getAuthToken();
+
+  if (!authToken) {
+    throw new Error("No authentication token found.");
+  }
+
+  try {
+    const response = await fetch("https://dummyjson.com/auth/me", {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${authToken}`,
+      },
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || "Failed to fetch profile data");
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error("Fetch profile error:", error);
     throw error;
   }
 };

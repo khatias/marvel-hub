@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
-import { getSingleProduct } from "../services/api";
+import useFetchSingleEntity from "../hooks/useFetchSingleEntity";
 import styles from "../styles/pages/ProductDetail.module.css";
 import GoBackButton from "../components/buttons/GoBackButton/GoBackButton";
 import Loader from "../components/Loader/Loader";
@@ -9,9 +9,10 @@ import CreatorsList from "../components/comics/CreatorList/CreatorList";
 import CharactersList from "../components/comics/CharactersList/CharactersList";
 import PriceDetails from "../components/comics/PriceDetails/PriceDetails";
 import ComicsSlider from "../components/Sliders/ComicsSlider";
-import { fetchComicsByTitle } from "../services/api";
+import { fetchComicsByTitle, getSingleProduct } from "../services/api";
 import { HeartIcon } from "@heroicons/react/outline";
 import { addToFavorites } from "../utils/favoritesUtils";
+
 const formatDate = (dateString) => {
   const options = { year: "numeric", month: "long", day: "numeric" };
   return new Date(dateString).toLocaleDateString(undefined, options);
@@ -19,36 +20,11 @@ const formatDate = (dateString) => {
 
 const ProductDetails = () => {
   const { id } = useParams();
-  const [comic, setComic] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const fetchSingleProduct = async () => {
-      try {
-        setLoading(true);
-        setError(null);
-        const data = await getSingleProduct(id);
-        const fetchedComic = data?.data?.results?.[0] || null;
-
-        if (fetchedComic) {
-          const storyIds =
-            fetchedComic?.stories?.items?.map((item) =>
-              item.resourceURI.split("/").pop()
-            ) || [];
-          console.log("Extracted storyIds:", storyIds);
-          setComic({ ...fetchedComic, storyIds });
-        }
-      } catch (error) {
-        setError("Failed to load product details. Please try again.");
-        console.error(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchSingleProduct();
-  }, [id]);
+  const {
+    entity: comic,
+    loading,
+    error,
+  } = useFetchSingleEntity(getSingleProduct, id);
 
   const groupedCreators = comic?.creators?.items?.reduce((acc, creator) => {
     if (!acc[creator.role]) {
@@ -59,7 +35,6 @@ const ProductDetails = () => {
   }, {});
 
   if (loading) return <Loader />;
-
   if (error)
     return <Error message={error} onRetry={() => window.location.reload()} />;
   if (!comic) return <p>No comic found.</p>;
@@ -96,7 +71,10 @@ const ProductDetails = () => {
               <CharactersList characters={comic.characters} />
 
               <PriceDetails prices={comic.prices} />
-              <button className={styles.favoriteButton} onClick={() => addToFavorites(comic)}>
+              <button
+                className={styles.favoriteButton}
+                onClick={() => addToFavorites(comic)}
+              >
                 <HeartIcon className={styles.icon} /> Add To Favorites
               </button>
               <GoBackButton />
@@ -115,7 +93,3 @@ const ProductDetails = () => {
 };
 
 export default ProductDetails;
-
-// const addToFavorites = ({ product }) => {
-//   localStorage.setItem(`favorites:${product.id}`, JSON.stringify(product));
-// };

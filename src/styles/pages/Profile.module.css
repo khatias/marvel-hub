@@ -1,18 +1,27 @@
-.profileContainer {
+.profilePageWrapper{
+  background-color: black;
+  height: 100vh;
+  color:white;
+}
+
+.profileDataContainer {
   padding: 20px;
   border-radius: 10px;
   max-width: 1280px;
   margin: 0 auto;
+
 }
 
-.profileContainer p {
+.profileDataContainer p {
   padding-bottom: 10px;
+  color:white;
+  font-size: 18px;
+  letter-spacing: 2px;
 }
 
 .profileImage {
   width: 150px;
   height: 150px;
-  border-radius: 50%;
   object-fit: cover;
   margin-bottom: 20px;
 }

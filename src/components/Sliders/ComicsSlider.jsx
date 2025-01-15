@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import SmallLoader from "../Loader/SmallLoader";
 import useFetchComics from "../../hooks/useFetchRelatedComics";
 import useWindowResize from "../../hooks/useWindowResize";
+import { handlePrevSlide, handleNextSlide, calculateSlideTransform } from "../../utils/slidesUtils";
 
 const ComicsSlider = ({ fetchComics, title, characterId, SliderTitle }) => {
   const { comics, loading, error } = useFetchComics(
@@ -16,18 +17,6 @@ const ComicsSlider = ({ fetchComics, title, characterId, SliderTitle }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const visibleSlides = useWindowResize();
   const navigate = useNavigate();
-
-  const handlePrevSlide = () => {
-    if (currentSlide > 0) {
-      setCurrentSlide(currentSlide - 1);
-    }
-  };
-
-  const handleNextSlide = () => {
-    if (currentSlide < comics.length - visibleSlides) {
-      setCurrentSlide(currentSlide + 1);
-    }
-  };
 
   if (loading) return <SmallLoader />;
   if (error) return <p>{error}</p>;
@@ -41,9 +30,7 @@ const ComicsSlider = ({ fetchComics, title, characterId, SliderTitle }) => {
             <div
               key={comic.id}
               className="slide"
-              style={{
-                transform: `translateX(-${currentSlide * 100}%)`,
-              }}
+              style={calculateSlideTransform(currentSlide)}
             >
               <Link to={`/products/${comic.id}`} className="comic-title">
                 <img
@@ -66,14 +53,14 @@ const ComicsSlider = ({ fetchComics, title, characterId, SliderTitle }) => {
         {comics.length > visibleSlides && (
           <div className="slider-controls">
             <button
-              onClick={handlePrevSlide}
+              onClick={() => handlePrevSlide(currentSlide, setCurrentSlide)}
               disabled={currentSlide === 0}
               className="slider-button prev"
             >
               <ChevronLeftIcon className="icon" />
             </button>
             <button
-              onClick={handleNextSlide}
+              onClick={() => handleNextSlide(currentSlide, comics.length, visibleSlides, setCurrentSlide)}
               disabled={currentSlide === comics.length - visibleSlides}
               className="slider-button next"
             >

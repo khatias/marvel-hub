@@ -128,13 +128,13 @@
   cursor: pointer;
 }
 
-.icon {
+.favoriteButton .icon {
   width: 20px;
   height: 20px;
 }
-.icon:hover {
+.favoriteButton .icon:hover {
   fill: red;
-  color:Red
+  color: Red;
 }
 
 @media screen and (min-width: 769px) {
